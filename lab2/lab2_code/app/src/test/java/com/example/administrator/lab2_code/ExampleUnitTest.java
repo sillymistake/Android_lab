@@ -1,4 +1,4 @@
-package com.chenpeijia.myapplication;
+package com.example.administrator.lab2_code;
 
 import org.junit.Test;
 
