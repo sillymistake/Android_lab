@@ -19,6 +19,7 @@ import android.widget.Toast;
  */
 
 public class StaticReceiver extends BroadcastReceiver {
+
     private String STATICACTION = "static";
 
     @Override

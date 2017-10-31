@@ -67,7 +67,8 @@ public class DynamicReceiver extends BroadcastReceiver {
                     break;
             }
 
-            NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationManager manager = (NotificationManager)
+                    context.getSystemService(Context.NOTIFICATION_SERVICE);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
             builder.setContentTitle("马上下单")
                     .setContentText(name+"已添加到购物车")

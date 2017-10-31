@@ -169,6 +169,7 @@ public class detail extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        //取消注册
         unregisterReceiver(dynamicReceiver);
     }
 

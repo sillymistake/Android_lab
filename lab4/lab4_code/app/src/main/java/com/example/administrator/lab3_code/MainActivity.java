@@ -182,9 +182,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
-        final RecyclerView item_ls = (RecyclerView) findViewById(R.id.recycler_view);
-        final ListView sc_list = (ListView) findViewById(R.id.shopcar);
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         Map<String,Object>tmp = new LinkedHashMap<>();
         String add_name = event.getMessage();
         int index = index_list.indexOf(add_name);
@@ -226,9 +223,7 @@ public class MainActivity extends AppCompatActivity {
             sc_list.setVisibility(View.VISIBLE);
             fab.setImageResource(R.drawable.mainpage);
             flag[0] = 1;
-
         }
-
     }
 
     protected void onDestory() {

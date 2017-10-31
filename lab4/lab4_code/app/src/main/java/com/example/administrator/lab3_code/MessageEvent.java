@@ -4,6 +4,7 @@ package com.example.administrator.lab3_code;
  * Created by Administrator on 2017/10/29.
  */
 
+
 public class MessageEvent {
 
     public String message;
