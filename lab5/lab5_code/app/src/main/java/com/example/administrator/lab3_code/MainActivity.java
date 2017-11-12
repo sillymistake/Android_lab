@@ -2,7 +2,6 @@ package com.example.administrator.lab3_code;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> index_list = new ArrayList<>();
 
     final String STATICACTION = "static";
+    final String STATICACTION_WIDGET = "static_widget";
     final int[] flag = {0};
     final String [] Name = new String[] {"Enchated Forest","Arla Milk","Devondale Milk","Kindle Oasis","waitrose 早餐麦片","Mcvitie's 饼干","Ferrero Rocher","Maltesers","Lindt","Borggreve"};
     final String [] Letter = new String[] {"E","A","D","K","W","M","F","M","L","B"};
@@ -57,6 +57,17 @@ public class MainActivity extends AppCompatActivity {
         Intent intentBroadcast = new Intent(STATICACTION);
         intentBroadcast.putExtras(bundle);
         sendBroadcast(intentBroadcast);
+
+        //widget静态广播
+        Bundle w_bundle = new Bundle();
+        w_bundle.putString("name",Name[r]);
+        w_bundle.putString("price",Price[r]);
+        w_bundle.putString("type",Type[r]);
+        w_bundle.putString("info",Info[r]);
+        Intent w_intentBroadcast = new Intent(STATICACTION_WIDGET);
+        w_intentBroadcast.putExtras(w_bundle);
+        sendBroadcast(w_intentBroadcast);
+
 
         //注册订阅者
         EventBus.getDefault().register(this);

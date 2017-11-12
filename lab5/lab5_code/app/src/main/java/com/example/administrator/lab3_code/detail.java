@@ -9,6 +9,7 @@ import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -31,8 +32,11 @@ import java.util.List;
 public class detail extends AppCompatActivity {
 
     private String DYNAMICACTION = "dynamic";
+    private String DYNAMICACTION_WIDGET = "dynamic_widget";
     private DynamicReceiver dynamicReceiver;
+    private DynamicReceiver w_dynamicReceiver;
     IntentFilter dynamic_filter;
+    IntentFilter w_dynamic_filter;
     String[] items = new String[]{"一键下单", "分享物品", "不感兴趣", "查看更多商品促销信息"};
 
     public void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,11 @@ public class detail extends AppCompatActivity {
         dynamicReceiver = new DynamicReceiver();
         dynamic_filter.addAction(DYNAMICACTION);
         registerReceiver(dynamicReceiver,dynamic_filter);
+
+        w_dynamic_filter = new IntentFilter();
+        w_dynamicReceiver = new DynamicReceiver();
+        w_dynamic_filter.addAction(DYNAMICACTION_WIDGET);
+        registerReceiver(w_dynamicReceiver,w_dynamic_filter);
 
         final Intent intent = getIntent();
         final String letter = intent.getStringExtra("letter");
@@ -159,8 +168,14 @@ public class detail extends AppCompatActivity {
                 EventBus.getDefault().post(new MessageEvent(name));
                 sendBroadcast(intentBroadcast);
 
-                //Toast.makeText(detail.this,"消息已发送",Toast.LENGTH_SHORT).show();
-
+                Bundle w_bundle = new Bundle();
+                w_bundle.putString("name",name);
+                w_bundle.putString("price",price);
+                w_bundle.putString("type",type);
+                w_bundle.putString("info",info);
+                Intent w_intentBroadcast = new Intent(DYNAMICACTION_WIDGET);
+                w_intentBroadcast.putExtras(w_bundle);
+                sendBroadcast(w_intentBroadcast);
             }
         });
 
@@ -171,6 +186,7 @@ public class detail extends AppCompatActivity {
         super.onDestroy();
         //取消注册
         unregisterReceiver(dynamicReceiver);
+        unregisterReceiver(w_dynamicReceiver);
     }
 
 }
